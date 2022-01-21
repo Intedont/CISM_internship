@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/base.css' %}">
+
+<body>
+<div>
+    <section>
+        <div class="head"> <a href="/"> Бложик </a> </div>
+        <ul class="menu">
+            {% if not username.is_anonymous %}
+                <li> <a href="/wastebin/">Корзина</a> </li>
+                <li> <a href="/accounts/{{ username }}">({{ username }})</a> <a href="/logout"> Выйти</a> </li>
+            {% else %}
+                <li><a href="/login">Войти</a></li>
+            {% endif %}
+        </ul>
+    </section>
+</div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

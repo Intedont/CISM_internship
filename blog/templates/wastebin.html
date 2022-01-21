@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Корзина
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/feed.css' %}">
+    <div class="content">
+    {% for post in posts %}
+        <div class="post">
+        <h3>
+            {{ post.title }}
+            <a href="/restore/{{ post.id }}"> <img src="{% static "restore.png" %}" width="20px" height="20px"> </a>
+            <a href="/delete/{{ post.id }}"> <img src="{% static "delete.png" %}" width="20px" height="20px"> </a>
+        </h3>
+        <h4>{{ post.author }}</h4>
+        <h4>Дата публикации:{{ post.date }}</h4>
+        <h4>{{ post.text }}</h4>
+        <p> <a href="like/{{ post.id }}"> <img src="{% static "like.png" %}" width="25px" height="25px"> </a> {{ post.likes }} </p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

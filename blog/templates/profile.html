@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ viewed_username }}
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/feed.css' %}">
+    <div class="content">
+        {% if username.username == viewed_username %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form">
+                    {{ form.as_p }}
+                    <button type="submit" class="button">Опубликовать</button>
+                </div>
+            </form>
+
+            {% for post in posts %}
+                <div class="post">
+                    <h3>  {{ post.title }} <a href="/delete/{{ post.id }}"> <img src="{% static "delete.png" %}" width="20px" height="20px"> </a></h3>
+                    <p>Автор: {{ post.author }}</p>
+                    <p>Дата публикации:{{ post.date }}</p>
+                    <p>{{ post.text }}</p>
+                    <p> <a href="/like/{{ post.id }}"> <img src="{% static "like.png" %}" width="25px" height="25px"> </a> {{ post.likes }} </p>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <h3>Публикации автора</h3>
+
+            {% for post in posts %}
+                <div class="post">
+                <h3>  {{ post.title }} </h3>
+                <p>{{ post.author }}</p>
+                <p>Дата публикации:{{ post.date }}</p>
+                <p>{{ post.text }}</p>
+                <p> <a href="/like/{{ post.id }}"> <img src="{% static "like.png" %}" width="25px" height="25px"> </a> {{ post.likes }} </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}

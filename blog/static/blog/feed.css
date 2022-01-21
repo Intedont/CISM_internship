@@ -1,0 +1,35 @@
+
+
+.post {
+    background: #dcfff7;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.content {
+    max-width: 70%;
+    margin: auto;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.form label {
+    font: normal 20px 'Roboto', sans-serif;
+    display: block;
+}
+
+.form input {
+    width: 100%;
+    border: none;
+    border-bottom: solid black;
+    outline: none;
+}
+
+.form textarea {
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+}

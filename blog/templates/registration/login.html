@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+
+<body>
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'blog/feed.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'blog/base.css' %}">
+
+
+<div class="head"> <a href="/"> Бложик </a> </div>
+
+<ul class="menu">
+    <li><a href="/login">Войти</a></li>
+</ul>
+
+    <div class="content">
+        <div class="card-body">
+            <h3 class="card-title">Войдите в аккаунт</h3>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                <div class="login">
+                    {{ form.as_p }}
+                    <button type="submit" class="button">Вход</button>
+                </div>
+            </form>
+
+            <div class="create"> <a href="/signup">Создать аккаунт</a> </div>
+        </div>
+    </div>
+</body>
+
+</html>
