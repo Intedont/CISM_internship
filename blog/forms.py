@@ -5,7 +5,7 @@ class SignUpForm(forms.Form):
     password = forms.CharField(label='Пароль      ')
 
 class NewPostForm(forms.Form):
-    title = forms.CharField(max_length=50, label='Заголовок')
+    title = forms.CharField(max_length=100, label='Заголовок')
     text = forms.CharField(widget=forms.Textarea, label='Текст')
 
 class CommentForm(forms.Form):
