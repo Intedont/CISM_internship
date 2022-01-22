@@ -1,3 +1,3 @@
-Django=4.01
+Django
 gunicorn
 django-heroku
