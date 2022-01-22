@@ -15,7 +15,7 @@ def index(request):
         ids.append(post.id)
     print("IDS")
     print(ids)
-    comments = Comment.objects.filter(post_id__in=ids).order_by('-date')[:6][::-1]
+    comments = Comment.objects.filter(post_id__in=ids).order_by('-date')[:5][::-1]
     print("COMMENTS")
     for comment in comments:
         print(comment)
