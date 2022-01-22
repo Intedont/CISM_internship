@@ -11,5 +11,6 @@ urlpatterns = [
     path('like/<int:id>', blog.views.like),
     path('delete/<int:id>', blog.views.delete),
     path('wastebin/', blog.views.wastebin),
-    path('restore/<int:id>', blog.views.restore)
+    path('restore/<int:id>', blog.views.restore),
+    path('add_comment/<int:id>', blog.views.addComment)
 ]

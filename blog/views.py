@@ -1,18 +1,30 @@
 from django.shortcuts import render
-from blog.forms import SignUpForm, NewPostForm
+from blog.forms import SignUpForm, NewPostForm, CommentForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from blog.models import Post, Comment
 from django.contrib.auth.decorators import login_required
 import datetime
+from django.db.models import QuerySet
 # Create your views here.
 
 def index(request):
     posts = Post.objects.filter(isActive=1).order_by('-date')
-    comments = Comment.objects.filter()[:3]
+    ids = []
+    for post in posts:
+        ids.append(post.id)
+    print("IDS")
+    print(ids)
+    comments = Comment.objects.filter(post_id__in=ids).order_by('-date')[:6][::-1]
+    print("COMMENTS")
+    for comment in comments:
+        print(comment)
+
     context ={
         'username': request.user,
-        'posts': posts
+        'posts': posts,
+        'comments': comments,
+        'form': CommentForm()
     }
     return render(request, 'index.html', context)
 
@@ -91,3 +103,15 @@ def restore(request, id):
         post.isActive = 1
         post.save()
     return redirect('/wastebin/')
+
+
+@login_required(login_url='/login')
+def addComment(request, id):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = Comment(text=form.cleaned_data.get('text'),
+                              post=Post.objects.get(id=id),
+                              author=request.user)
+            comment.save()
+        return redirect('/')

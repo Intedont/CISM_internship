@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -14,7 +14,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    text = models.TextField
+    date = models.DateTimeField(default=datetime.datetime.now())
+    text = models.TextField(default="")
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE

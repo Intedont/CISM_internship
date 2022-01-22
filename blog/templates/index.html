@@ -2,8 +2,6 @@
 
 {% load static %}
 
-
-
 {% block title %}
 Последние записи
 {% endblock %}
@@ -18,6 +16,25 @@
                 <p>Дата публикации: {{ post.date }}</p>
                 <p>{{ post.text }}</p>
                 <p> <a href="like/{{ post.id }}"> <img src="{% static "like.png" %}" width="25px" height="25px"> </a> {{ post.likes }} </p>
+                <h3>Комментарии:</h3>
+                <hr>
+
+                {% for comment in comments %}
+                    {% if comment.post == post %}
+                        <p><h4>{{ comment.author.username }}</h4></p>
+                        <p>{{ comment.text }}</p>
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+
+                <form action="/add_comment/{{ post.id }}" method="post">
+                    {% csrf_token %}
+                    <div class="form_comm">
+                        {{ form.as_p }}
+                        <button type="submit" class="button">Отправить</button>
+                    </div>
+                </form>
+
             </div>
         {% endfor %}
     </div>
