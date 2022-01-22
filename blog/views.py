@@ -112,6 +112,7 @@ def addComment(request, id):
         if form.is_valid():
             comment = Comment(text=form.cleaned_data.get('text'),
                               post=Post.objects.get(id=id),
-                              author=request.user)
+                              author=request.user,
+                              date=datetime.datetime.now())
             comment.save()
         return redirect('/')
